@@ -1,12 +1,7 @@
-from django.urls import path , include
-from rest_framework.routers import DefaultRouter
-from tasks.views import TaskViewSet
+from rest_framework import viewsets
+from .models import Task
+from .serializers import TaskSerializer
 
-# Create your views here.
-router = DefaultRouter()
-router.register(r'tasks', TaskViewSet)
-
-
-urlpatterns = [
-    path('', include(router.urls)),
-]
+class TaskViewSet(viewsets.ModelViewSet):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
